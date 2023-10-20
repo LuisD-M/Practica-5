@@ -11,10 +11,12 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    muros.cpp \
     sprite.cpp
 
 HEADERS += \
     mainwindow.h \
+    muros.h \
     sprite.h
 
 FORMS += \

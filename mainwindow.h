@@ -12,7 +12,11 @@
 #include <QDesktopWidget>
 #include <QDebug>
 #include "sprite.h"
-
+#include "muros.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
 
 
 QT_BEGIN_NAMESPACE
@@ -27,11 +31,13 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
     sprite *personaje;
     QTimer *timer;
+    QList<muros *> muro;
     float x,y,ancho,alto;
 
 };

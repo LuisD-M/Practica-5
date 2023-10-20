@@ -1,13 +1,12 @@
 #include "sprite.h"
-#include "moneda.h"
 #include <QDebug>
 
-sprite::sprite(int r_, int x, int y) // constructor de sprite, inicializar radio, posicion en x e y
+sprite::sprite(int r_, int x, int y)                        // constructor de sprite, inicializar radio, posicion en x e y
 {
     r = r_;
     posx = x;
     posy = y;
-    setPos(posx,posy); // establecer la posicion del sprite en la escena
+    setPos(posx,posy);                                          // establecer la posicion del sprite en la escena
 }
 sprite::sprite(QObject *parent) : QObject(parent)
 {
