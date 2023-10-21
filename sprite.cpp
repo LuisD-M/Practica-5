@@ -53,6 +53,12 @@ void sprite::MoveLeft(){
     setPos(posx,posy);
 }
 
+void sprite::Move(){
+    setPos(posx,posy);
+}
+
+
+
 QRectF sprite::boundingRect() const{
     return QRectF(-ancho/2,-alto/2,ancho,alto); // delimitador del sprite
 }
@@ -61,6 +67,22 @@ QRectF sprite::boundingRect() const{
 void sprite::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr){
     painter->drawPixmap(-ancho/2, -alto/2,*pixmap,columnas,0,ancho,alto);
     setScale(0.30); // dibujar la apariencia visual del sprite utilizando
+}
+
+int sprite::getPosx() const{
+    return posx;
+}
+
+void sprite::setPosx(int px){
+    posx = px;
+}
+
+int sprite::getPosy() const{
+    return posy;
+}
+
+void sprite::setPosy(int py){
+    posy=py;
 }
 
 

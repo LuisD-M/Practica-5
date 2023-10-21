@@ -14,6 +14,7 @@
 #include "sprite.h"
 #include "muros.h"
 #include "moneda.h"
+#include "cereza.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -42,6 +43,7 @@ private:
     QTimer *timer;
     QList<muros *> muro;
     QList<moneda *> monedas;
+    QList<Cereza *> cerezas;
     float x,y,ancho,alto;
 
 };

@@ -29,6 +29,13 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+    int getPosx() const;
+    void setPosx(int px);
+    int getPosy() const;
+    void setPosy(int py);
+
+
+
 signals:
 
 public slots:
@@ -37,6 +44,7 @@ public slots:
     void MoveDown();
     void MoveRight();
     void MoveLeft();
+    void Move();
 };
 
 #endif // SPRITE_H

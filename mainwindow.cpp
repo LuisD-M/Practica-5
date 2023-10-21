@@ -26,10 +26,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     ui->graphicsView->setScene(scene);
 
-    personaje = new sprite();                           // crear Pacman
-    scene->addItem(personaje);                         //Añade a la escena
-    personaje->setPos(20,20);                         //Poscicion de la escena
-
     int wi, hi, xi, yi;                               //leen los parametros dde cada bloque
     string linea;
 
@@ -65,31 +61,82 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     }
     in.close();
 
+    ifstream cer("cereza.txt");
+
+    while (getline(cer, linea)) {
+        stringstream ss(linea);
+        string valor;
+
+        if (getline(ss, valor, ',')) wi = stoi(valor);
+        if (getline(ss, valor, ',')) hi = stoi(valor);
+        if (getline(ss, valor, ',')) xi = stoi(valor);
+        if (getline(ss, valor, ',')) yi = stoi(valor);
+
+        cerezas.push_back(new Cereza(wi,hi,xi,yi));
+        scene->addItem(cerezas.back());
+    }
+    cer.close();
+
+    personaje = new sprite();                           // crear Pacman
+    scene->addItem(personaje);                         //Añade a la escena
+    personaje->setPos(20,20);                         //Poscicion de la escena
+
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
 
     if(event->key()==Qt::Key_W){
-        personaje->MoveUp();                  // mover sprite hacia arriba
-        personaje->setRotation(270);          // mirar hacia arriba
-        //qDebug()<<personaje->y();
+        personaje->MoveUp();                                                          // mover sprite hacia arriba
+        personaje->setRotation(-90);                                                  // mirar hacia arriba
+
+        for(auto it = muro.begin(); it != muro.end(); it++){                          //recorre la lista de los muros
+            if(personaje -> collidesWithItem(*it))                                    //Si las possiciones son iguales
+                personaje -> MoveDown();                                              //Mueve al contrario
+        }
     }
 
     else if(event->key()==Qt::Key_S){
-        personaje->MoveDown();
+        personaje->MoveDown();                                                       //Mover haccia abajo
         personaje->setRotation(90);
+
+        for(auto it = muro.begin(); it != muro.end(); it++){
+            if(personaje -> collidesWithItem(*it))
+                personaje -> MoveUp();                                              //Mueve al contrario
+        }
+
     }
 
     else if(event->key()==Qt::Key_A){
-        personaje->MoveLeft();
+        personaje->MoveLeft();                                                         //Mover a la izquierda
         personaje->setRotation(180);
 
+        for(auto it = muro.begin(); it != muro.end(); it++){
+            if(personaje -> collidesWithItem(*it))
+                personaje -> MoveRight();                                              //Mueve al contrario
+        }
+
+        if(personaje->x() == -20 && personaje->y() == 280){                            //Si se sale por la izquierda
+            personaje->setPosx(560);                                                 //regresa a la derecha
+            personaje->setPosy(280);
+            personaje->Move();
+
+
+        }
     }
 
     else if(event->key()==Qt::Key_D){
-        personaje->MoveRight();
+        personaje->MoveRight();                                                     //Mueve a la derecha
         personaje->setRotation(0);
 
+        for(auto it = muro.begin(); it != muro.end(); it++){
+            if(personaje -> collidesWithItem(*it))
+                personaje -> MoveLeft();                                              //Mueve al contrario
+        }
+
+        if(personaje -> x() == 560 && personaje -> y() == 280){                     //Si se sale por la derecha
+            personaje ->setPosx(-20);                                          //Regresa a la izquierda
+            personaje->setPosy(280);
+        }
     }
 }
 
