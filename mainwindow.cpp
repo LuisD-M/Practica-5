@@ -47,6 +47,24 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         muro.push_back(new muros(wi,hi,xi,yi));
         scene->addItem(muro.back());
     }
+    archivo.close();
+
+    ifstream in("monedas.txt");
+
+    while (getline(in, linea)) {
+        stringstream ss(linea);
+        string valor;
+
+        if (getline(ss, valor, ',')) wi = stoi(valor);
+        if (getline(ss, valor, ',')) hi = stoi(valor);
+        if (getline(ss, valor, ',')) xi = stoi(valor);
+        if (getline(ss, valor, ',')) yi = stoi(valor);
+
+        monedas.push_back(new moneda(wi,hi,xi,yi));
+        scene->addItem(monedas.back());
+    }
+    in.close();
+
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
@@ -65,6 +83,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
     else if(event->key()==Qt::Key_A){
         personaje->MoveLeft();
         personaje->setRotation(180);
+
     }
 
     else if(event->key()==Qt::Key_D){
@@ -73,9 +92,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 
     }
 }
-
-
-
 
 
 MainWindow::~MainWindow(){

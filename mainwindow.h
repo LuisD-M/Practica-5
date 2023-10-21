@@ -13,6 +13,7 @@
 #include <QDebug>
 #include "sprite.h"
 #include "muros.h"
+#include "moneda.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -40,6 +41,7 @@ private:
     sprite *personaje;
     QTimer *timer;
     QList<muros *> muro;
+    QList<moneda *> monedas;
     float x,y,ancho,alto;
 
 };
