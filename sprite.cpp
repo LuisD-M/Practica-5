@@ -33,16 +33,34 @@ void sprite::Actualizacion() // ejecuta cada vez que el QTimer emite la señal d
     this->update(-ancho/2,-alto/2,ancho,alto); //  actualizar la apariencia visual del sprite
 }
 
-QRectF sprite::boundingRect() const
-{
+void sprite::MoveUp(){
+    posy -= velocidad;
+    setPos(posx,posy);
+}
+
+void sprite::MoveDown(){
+    posy += velocidad;
+    setPos(posx,posy);
+}
+
+void sprite::MoveRight(){
+    posx += velocidad;
+    setPos(posx,posy);
+}
+
+void sprite::MoveLeft(){
+    posx -= velocidad;
+    setPos(posx,posy);
+}
+
+QRectF sprite::boundingRect() const{
     return QRectF(-ancho/2,-alto/2,ancho,alto); // delimitador del sprite
 }
 
 
-void sprite::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr)
-{
+void sprite::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr){
     painter->drawPixmap(-ancho/2, -alto/2,*pixmap,columnas,0,ancho,alto);
-    setScale(0.35); // dibujar la apariencia visual del sprite utilizando
+    setScale(0.30); // dibujar la apariencia visual del sprite utilizando
 }
 
 

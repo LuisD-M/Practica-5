@@ -7,13 +7,14 @@
 #include <QPixmap>
 #include <QPainter>
 #include <QGraphicsScene>
+#include <QKeyEvent>
 
 class sprite : public QObject, public QGraphicsItem
 {
     Q_OBJECT
     int r; // radio
     int posx = 20, posy = 20;                                      // posición del pacman en la escena.
-
+    int velocidad=3;
 
 public:
     explicit sprite(QObject *parent = nullptr);
@@ -32,6 +33,10 @@ signals:
 
 public slots:
     void Actualizacion(); // actualización periódica del sprite
+    void MoveUp();
+    void MoveDown();
+    void MoveRight();
+    void MoveLeft();
 };
 
 #endif // SPRITE_H

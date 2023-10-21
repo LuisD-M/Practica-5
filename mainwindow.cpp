@@ -46,6 +46,30 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
         muro.push_back(new muros(wi,hi,xi,yi));
         scene->addItem(muro.back());
+    }
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event){
+
+    if(event->key()==Qt::Key_W){
+        personaje->MoveUp();                  // mover sprite hacia arriba
+        personaje->setRotation(270);          // mirar hacia arriba
+        //qDebug()<<personaje->y();
+    }
+
+    else if(event->key()==Qt::Key_S){
+        personaje->MoveDown();
+        personaje->setRotation(90);
+    }
+
+    else if(event->key()==Qt::Key_A){
+        personaje->MoveLeft();
+        personaje->setRotation(180);
+    }
+
+    else if(event->key()==Qt::Key_D){
+        personaje->MoveRight();
+        personaje->setRotation(0);
 
     }
 }
@@ -54,9 +78,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 
 
-
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow(){
     delete ui;
 }
 
