@@ -4,5 +4,6 @@
         <file>images/Pacman.png</file>
         <file>images/Coin.png</file>
         <file>images/Cereza.png</file>
+        <file>images/fantasma.jpg</file>
     </qresource>
 </RCC>

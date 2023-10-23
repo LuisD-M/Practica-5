@@ -9,7 +9,6 @@ using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) // configurar la interfaz de la ventana principal
 
-
 {
     ui->setupUi(this);
     QRect Desktop = QApplication::desktop()->screenGeometry();
@@ -81,9 +80,45 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     scene->addItem(personaje);                         //Añade a la escena
     personaje->setPos(20,20);                         //Poscicion de la escena
 
+    puntos = new puntaje;                            //añade puntaje
+    scene->addItem(puntos);
+    puntos->setPos(-160,-20);
+
+    final = new fin;
+    final->setPos(-120,270);
+
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
+
+    if(personaje->x() < -20)                                        //Si se sale por la izquierda, inicia en la derecha
+        personaje->setPosx(560);
+
+    if(personaje -> x() > 560)                                     //Si se sale por la derecha, inicia en la izquierda
+        personaje->setPosx(20);
+
+    for(int i=0; i<monedas.size(); i++){                            //Colision de con las monedas y desaparecen
+        if(personaje->collidesWithItem(monedas.at(i))){
+            scene->removeItem(monedas.at(i));                         //Eliminar de la escena la moneda
+            monedas.removeAt(i);
+            puntos->increaseMoneda();
+        }
+    }
+
+    for(int i=0; i<cerezas.size(); i++){                             //Colision con las cerezas
+        if(personaje->collidesWithItem(cerezas.at(i))){
+            scene->removeItem(cerezas.at(i));                        //eliminar cereza de la escena
+            cerezas.removeAt(i);
+            puntos->increaseCereza();
+        }
+    }
+
+    if(puntos->getpuntaje() == 314){
+        scene->removeItem(personaje);
+        scene->addItem(final);
+    }
+
+
 
     if(event->key()==Qt::Key_W){
         personaje->MoveUp();                                                          // mover sprite hacia arriba
@@ -103,7 +138,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
             if(personaje -> collidesWithItem(*it))
                 personaje -> MoveUp();                                              //Mueve al contrario
         }
-
     }
 
     else if(event->key()==Qt::Key_A){
@@ -114,14 +148,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
             if(personaje -> collidesWithItem(*it))
                 personaje -> MoveRight();                                              //Mueve al contrario
         }
-
-        if(personaje->x() == -20 && personaje->y() == 280){                            //Si se sale por la izquierda
-            personaje->setPosx(560);                                                 //regresa a la derecha
-            personaje->setPosy(280);
-            personaje->Move();
-
-
-        }
     }
 
     else if(event->key()==Qt::Key_D){
@@ -131,11 +157,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
         for(auto it = muro.begin(); it != muro.end(); it++){
             if(personaje -> collidesWithItem(*it))
                 personaje -> MoveLeft();                                              //Mueve al contrario
-        }
-
-        if(personaje -> x() == 560 && personaje -> y() == 280){                     //Si se sale por la derecha
-            personaje ->setPosx(-20);                                          //Regresa a la izquierda
-            personaje->setPosy(280);
         }
     }
 }

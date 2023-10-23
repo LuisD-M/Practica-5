@@ -10,8 +10,8 @@ sprite::sprite(int r_, int x, int y)                        // constructor de sp
 }
 sprite::sprite(QObject *parent) : QObject(parent)
 {
-    timer = new QTimer(); // inicializar puntero de Qtimer
-    pixmap = new QPixmap(":/images/Pacman.png"); // inicializar puntero de QPixmap
+    timer = new QTimer();                                           // inicializar puntero de Qtimer
+    pixmap = new QPixmap(":/images/Pacman.png");                     // inicializar puntero de QPixmap
     filas = 0;
     columnas = 0;
 
@@ -53,20 +53,13 @@ void sprite::MoveLeft(){
     setPos(posx,posy);
 }
 
-void sprite::Move(){
-    setPos(posx,posy);
-}
-
-
-
 QRectF sprite::boundingRect() const{
     return QRectF(-ancho/2,-alto/2,ancho,alto); // delimitador del sprite
 }
 
-
 void sprite::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr){
     painter->drawPixmap(-ancho/2, -alto/2,*pixmap,columnas,0,ancho,alto);
-    setScale(0.30); // dibujar la apariencia visual del sprite utilizando
+    setScale(0.29);                                              // dibujar la apariencia visual del sprite utilizando
 }
 
 int sprite::getPosx() const{

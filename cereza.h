@@ -16,7 +16,7 @@ public:
     float filas, columnas, ancho, alto;                      //Disposicion de la imagen
 
     QPixmap *pixmap3;
-    QRectF boundingRect() const;                            //delimitador de la moneda
+    QRectF boundingRect() const;                            //delimitador de la cereza
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
 };
 

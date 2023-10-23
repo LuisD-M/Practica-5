@@ -10,17 +10,21 @@ CONFIG += c++11
 
 SOURCES += \
     cereza.cpp \
+    fin.cpp \
     main.cpp \
     mainwindow.cpp \
     moneda.cpp \
     muros.cpp \
+    puntaje.cpp \
     sprite.cpp
 
 HEADERS += \
     cereza.h \
+    fin.h \
     mainwindow.h \
     moneda.h \
     muros.h \
+    puntaje.h \
     sprite.h
 
 FORMS += \

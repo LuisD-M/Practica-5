@@ -15,6 +15,8 @@
 #include "muros.h"
 #include "moneda.h"
 #include "cereza.h"
+#include "puntaje.h"
+#include "fin.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -44,6 +46,8 @@ private:
     QList<muros *> muro;
     QList<moneda *> monedas;
     QList<Cereza *> cerezas;
+    puntaje *puntos;
+    fin *final;
     float x,y,ancho,alto;
 
 };
